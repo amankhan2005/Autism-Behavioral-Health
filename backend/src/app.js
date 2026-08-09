@@ -16,32 +16,99 @@ import apiRouter from './routes/index.js';
 export function createApp() {
   const app = express();
 
-  app.set('trust proxy', 1); // Render/Vercel sit behind a proxy — needed for correct req.ip
+  // Proxy configuration
+  app.set('trust proxy', 1);
 
+  // Security headers
   app.use(helmet());
+
+  // CORS
   app.use(
     cors({
-      origin(origin, cb) {
-        // Allow same-origin / server-to-server (no origin) and whitelisted origins.
-        if (!origin || corsOrigins.includes(origin)) return cb(null, true);
-        return cb(new Error('Not allowed by CORS'));
+      origin(origin, callback) {
+        // Allow requests without Origin
+        // (curl, Postman, server-to-server, etc.)
+        if (!origin) {
+          return callback(null, true);
+        }
+
+        // Allow whitelisted websites
+        if (corsOrigins.includes(origin)) {
+          return callback(null, true);
+        }
+
+        return callback(new Error(`CORS blocked origin: ${origin}`));
       },
-      methods: ['GET', 'POST'],
+
+      methods: [
+        'GET',
+        'POST',
+        'PUT',
+        'PATCH',
+        'DELETE',
+        'OPTIONS',
+      ],
+
+      allowedHeaders: [
+        'Content-Type',
+        'Authorization',
+        'Accept',
+        'Origin',
+        'X-Requested-With',
+      ],
+
       credentials: false,
+
+      optionsSuccessStatus: 204,
     })
   );
+
+  // Compression
   app.use(compression());
+
+  // Body parsers
   app.use(express.json({ limit: '10kb' }));
-  app.use(express.urlencoded({ extended: true, limit: '10kb' }));
+  app.use(
+    express.urlencoded({
+      extended: true,
+      limit: '10kb',
+    })
+  );
+
+  // MongoDB sanitization
   app.use(mongoSanitize());
+
+  // Custom sanitization
   app.use(sanitizeBody);
-  if (!isTest) app.use(pinoHttp({ logger }));
+
+  // HTTP logging
+  if (!isTest) {
+    app.use(
+      pinoHttp({
+        logger,
+      })
+    );
+  }
+
+  // Rate limiting
   app.use(globalLimiter);
 
-  app.get('/', (_req, res) => res.json({ success: true, service: 'ABH API', docs: '/api/v1/health' }));
+  // Root endpoint
+  app.get('/', (_req, res) => {
+    res.json({
+      success: true,
+      service: 'ABH API',
+      docs: '/api/v1/health',
+    });
+  });
+
+  // API routes
   app.use('/api/v1', apiRouter);
 
+  // 404
   app.use(notFound);
+
+  // Error handler
   app.use(errorHandler);
 
   return app;
