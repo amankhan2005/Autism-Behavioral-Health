@@ -2,18 +2,24 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { careSchema, careDefaults } from '@/lib/validation/careRequest.schema.js';
 import { useSubmitForm } from '@/hooks/useSubmitForm.js';
+import { useMathCaptcha } from '@/hooks/useMathCaptcha.js';
 import { services } from '@/content/services.js';
 import { Field, TextArea, Select, Checkbox, Honeypot } from './fields.jsx';
+import MathCaptcha from './MathCaptcha.jsx';
 import SubmitButton from './SubmitButton.jsx';
 
 export default function ScheduleCareForm() {
   const { register, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: zodResolver(careSchema), defaultValues: careDefaults,
   });
-  const { onSubmit, submitting } = useSubmitForm('/schedule-care', { reset });
+  const captcha = useMathCaptcha();
+  const { onSubmit, submitting } = useSubmitForm('/schedule-care', {
+    reset: () => { reset(); captcha.regenerate(); },
+  });
+  const guardedSubmit = (values) => { if (captcha.solved) onSubmit(values); };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="relative space-y-4" noValidate>
+    <form onSubmit={handleSubmit(guardedSubmit)} className="relative space-y-4" noValidate>
       <Honeypot register={register} />
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Parent / caregiver name" name="fullName" required autoComplete="name" error={errors.fullName?.message} {...register('fullName')} />
@@ -51,7 +57,8 @@ export default function ScheduleCareForm() {
       </div>
       <TextArea label="Anything you'd like us to know? (optional)" name="message" error={errors.message?.message} {...register('message')} />
       <Checkbox label="I agree to be contacted about scheduling care." name="consent" {...register('consent')} error={errors.consent?.message} />
-      <SubmitButton submitting={submitting}>Request care</SubmitButton>
+      <MathCaptcha {...captcha.fieldProps} />
+      <SubmitButton submitting={submitting} disabled={!captcha.solved}>Request care</SubmitButton>
     </form>
   );
 }

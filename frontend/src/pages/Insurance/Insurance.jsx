@@ -6,7 +6,7 @@ import Reveal from '@/components/ui/Reveal.jsx';
 import Accordion from '@/components/ui/Accordion.jsx';
 import PageHero from '@/components/sections/PageHero.jsx';
 import CtaBand from '@/components/sections/CtaBand.jsx';
-import InsuranceMarquee from '@/components/sections/InsuranceMarquee.jsx';
+import InsuranceLogos from '@/components/sections/InsuranceLogos.jsx';
 import InsuranceInquiryForm from '@/components/forms/InsuranceInquiryForm.jsx';
 import { site } from '@/content/site.js';
 
@@ -53,12 +53,11 @@ export default function Insurance() {
             <p className="mt-4 text-muted">Don’t see yours? Contact us — we may still be able to help.</p>
           </Reveal>
         </Container>
-        <Reveal className="mt-12">
-          <InsuranceMarquee duration={38} />
-        </Reveal>
-        <Reveal className="mt-6">
-          <InsuranceMarquee duration={46} />
-        </Reveal>
+        <Container>
+          <Reveal className="mt-12">
+            <InsuranceLogos />
+          </Reveal>
+        </Container>
       </section>
 
       {/* How it works */}
