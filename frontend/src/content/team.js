@@ -3,10 +3,10 @@
 export const team = [
   {
     name: 'Rose Ngatia',
-    credentials: 'MSN, RN',
+    credentials: 'MSN, PMHNP',
     role: 'Nursing & Clinical Care',
     photo: null,
-    initials: 'RN',
+    initials: 'PMHNP',
     accent: 'brand',
     bio: 'Rose Ngatia holds a Master’s degree from La Salle University and a Bachelor’s in Nursing. She has worked as a nurse in a neurodevelopmental unit, giving her deep, hands-on insight into the needs of children with autism. She is dedicated to providing compassionate, evidence-based ABA care that helps every child achieve independence and meaningful progress.',
   },
