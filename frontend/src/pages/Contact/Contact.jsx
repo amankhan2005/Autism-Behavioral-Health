@@ -1,12 +1,12 @@
 import { Phone, Mail, MapPin, Clock, Printer } from 'lucide-react';
-import Seo from '@/components/seo/Seo.jsx';
-import { organizationSchema, breadcrumbSchema } from '@/lib/seo.js';
-import Container from '@/components/ui/Container.jsx';
-import Reveal from '@/components/ui/Reveal.jsx';
-import PageHero from '@/components/sections/PageHero.jsx';
-import CtaBand from '@/components/sections/CtaBand.jsx';
-import ContactPageForm from '@/components/forms/ContactPageForm.jsx';
-import { site } from '@/content/site.js';
+import Seo from '../../components/seo/Seo.jsx';
+import { organizationSchema, breadcrumbSchema } from '../../lib/seo.js';
+import Container from '../../components/ui/Container.jsx';
+import Reveal from '../../components/ui/Reveal.jsx';
+import PageHero from '../../components/sections/PageHero.jsx';
+import CtaBand from '../../components/sections/CtaBand.jsx';
+import ContactPageForm from '../../components/forms/ContactPageForm.jsx';
+import { site } from '../../content/site.js';
 
 const details = [
   { icon: MapPin, label: 'Address', value: `${site.address.line1}, ${site.address.city}, ${site.address.state} ${site.address.zip}` },
@@ -20,8 +20,8 @@ export default function Contact() {
     <>
       <Seo
         title="Contact Us"
-        description="Get in touch with Autism & Behavioral Health LLC. Reach out with questions or to begin ABA care for your child."
         path="/contact"
+        ogType="article"
         schema={[organizationSchema(), breadcrumbSchema([{ name: 'Home', to: '/' }, { name: 'Contact', to: '/contact' }])]}
       />
       <PageHero

@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { contactSchema, contactDefaults } from '@/lib/validation/contact.schema.js';
-import { useSubmitForm } from '@/hooks/useSubmitForm.js';
-import { useMathCaptcha } from '@/hooks/useMathCaptcha.js';
+import { contactSchema, contactDefaults } from '../../lib/validation/contact.schema.js';
+import { useSubmitForm } from '../../hooks/useSubmitForm.js';
+import { useMathCaptcha } from '../../hooks/useMathCaptcha.js';
 import { Field, TextArea, Checkbox, Honeypot } from './fields.jsx';
 import MathCaptcha from './MathCaptcha.jsx';
 import SubmitButton from './SubmitButton.jsx';

@@ -1,13 +1,13 @@
 import { useMemo, useState } from 'react';
 import { Search, ArrowUpRight } from 'lucide-react';
-import Seo from '@/components/seo/Seo.jsx';
-import { breadcrumbSchema } from '@/lib/seo.js';
-import Container from '@/components/ui/Container.jsx';
-import Reveal from '@/components/ui/Reveal.jsx';
-import Icon from '@/components/ui/Icon.jsx';
-import PageHero from '@/components/sections/PageHero.jsx';
-import CtaBand from '@/components/sections/CtaBand.jsx';
-import { resources, resourceCategories } from '@/content/resources.js';
+import Seo from '../../components/seo/Seo.jsx';
+import { breadcrumbSchema } from '../../lib/seo.js';
+import Container from '../../components/ui/Container.jsx';
+import Reveal from '../../components/ui/Reveal.jsx';
+import Icon from '../../components/ui/Icon.jsx';
+import PageHero from '../../components/sections/PageHero.jsx';
+import CtaBand from '../../components/sections/CtaBand.jsx';
+import { resources, resourceCategories } from '../../content/resources.js';
 
 // Category → color coding (drawn from the brand + spectrum palette).
 const catStyle = {
@@ -38,8 +38,8 @@ export default function Resources() {
     <>
       <Seo
         title="Resources"
-        description="Trusted Delaware autism and family resources — state agencies, advocacy organizations, Medicaid, and support lines for the families we serve."
         path="/resources"
+        ogType="article"
         schema={breadcrumbSchema([{ name: 'Home', to: '/' }, { name: 'Resources', to: '/resources' }])}
       />
       <PageHero

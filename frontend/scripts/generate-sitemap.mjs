@@ -1,7 +1,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { services } from '../src/content/services.js';
 
-const base = process.env.VITE_SITE_URL || 'https://autismbehavioralhealth.com';
+const base = process.env.VITE_SITE_URL || 'https://autismbehavioralhealths.com';
 const staticPaths = [
   '/', '/about', '/services', '/resources', '/insurance', '/employee-portal',
   '/contact', '/privacy-policy', '/terms', '/cookie-policy', '/do-not-sell',

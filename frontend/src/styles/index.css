@@ -43,3 +43,21 @@
             mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   }
 }
+
+/* Google Translate — the native widget is hidden; a custom selector
+   (GoogleTranslate.jsx) drives it. Keep it in the DOM and functional, but
+   removed from view, and stop Google's banner from shifting the header. */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-gadget-icon { display: none !important; }
+body { top: 0 !important; }
+#google_translate_element {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+/* Google can add inline highlight styles to translated text; keep backgrounds clean. */
+font.goog-text-highlight { background: none !important; box-shadow: none !important; }

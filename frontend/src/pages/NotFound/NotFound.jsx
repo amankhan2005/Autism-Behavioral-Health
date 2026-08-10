@@ -1,6 +1,6 @@
-import Seo from '@/components/seo/Seo.jsx';
-import Container from '@/components/ui/Container.jsx';
-import Button from '@/components/ui/Button.jsx';
+import Seo from '../../components/seo/Seo.jsx';
+import Container from '../../components/ui/Container.jsx';
+import Button from '../../components/ui/Button.jsx';
 
 export default function NotFound() {
   return (

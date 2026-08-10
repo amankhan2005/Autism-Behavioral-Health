@@ -1,6 +1,6 @@
-import Container from '@/components/ui/Container.jsx';
-import Button from '@/components/ui/Button.jsx';
-import { site } from '@/content/site.js';
+import Container from '../ui/Container.jsx';
+import Button from '../ui/Button.jsx';
+import { site } from '../../content/site.js';
 
 export default function CtaBand({
   title = 'Let’s take the next step together.',

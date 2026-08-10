@@ -1,11 +1,11 @@
 import { AlertCircle } from 'lucide-react';
-import Seo from '@/components/seo/Seo.jsx';
-import { breadcrumbSchema } from '@/lib/seo.js';
-import Container from '@/components/ui/Container.jsx';
-import Reveal from '@/components/ui/Reveal.jsx';
-import Button from '@/components/ui/Button.jsx';
-import PageHero from '@/components/sections/PageHero.jsx';
-import { site } from '@/content/site.js';
+import Seo from '../../components/seo/Seo.jsx';
+import { breadcrumbSchema } from '../../lib/seo.js';
+import Container from '../../components/ui/Container.jsx';
+import Reveal from '../../components/ui/Reveal.jsx';
+import Button from '../../components/ui/Button.jsx';
+import PageHero from '../../components/sections/PageHero.jsx';
+import { site } from '../../content/site.js';
 
 const anchor = (h) => 's-' + h.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 

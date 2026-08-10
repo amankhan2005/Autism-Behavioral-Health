@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://autismbehavioralhealth.com/sitemap.xml
+Sitemap: https://autismbehavioralhealths.com/sitemap.xml

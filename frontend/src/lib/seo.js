@@ -1,4 +1,4 @@
-import { site } from '@/content/site.js';
+import { site } from '../content/site.js';
 
 export const organizationSchema = () => ({
   '@context': 'https://schema.org',

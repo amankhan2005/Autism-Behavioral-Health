@@ -1,14 +1,14 @@
 import { PhoneCall, FileCheck2, HandCoins, ShieldCheck } from 'lucide-react';
-import Seo from '@/components/seo/Seo.jsx';
-import { breadcrumbSchema, faqSchema } from '@/lib/seo.js';
-import Container from '@/components/ui/Container.jsx';
-import Reveal from '@/components/ui/Reveal.jsx';
-import Accordion from '@/components/ui/Accordion.jsx';
-import PageHero from '@/components/sections/PageHero.jsx';
-import CtaBand from '@/components/sections/CtaBand.jsx';
-import InsuranceLogos from '@/components/sections/InsuranceLogos.jsx';
-import InsuranceInquiryForm from '@/components/forms/InsuranceInquiryForm.jsx';
-import { site } from '@/content/site.js';
+import Seo from '../../components/seo/Seo.jsx';
+import { breadcrumbSchema, faqSchema } from '../../lib/seo.js';
+import Container from '../../components/ui/Container.jsx';
+import Reveal from '../../components/ui/Reveal.jsx';
+import Accordion from '../../components/ui/Accordion.jsx';
+import PageHero from '../../components/sections/PageHero.jsx';
+import CtaBand from '../../components/sections/CtaBand.jsx';
+import InsuranceLogos from '../../components/sections/InsuranceLogos.jsx';
+import InsuranceInquiryForm from '../../components/forms/InsuranceInquiryForm.jsx';
+import { site } from '../../content/site.js';
 
 const steps = [
   { icon: FileCheck2, title: 'Share your details', text: 'Tell us your insurance provider using the form below.', accent: 'brand' },
@@ -33,8 +33,8 @@ export default function Insurance() {
     <>
       <Seo
         title="Insurance Accepted"
-        description="We work with major insurance carriers and help families verify their ABA therapy benefits. Submit your details and we’ll check your coverage."
         path="/insurance"
+        ogType="article"
         schema={[breadcrumbSchema([{ name: 'Home', to: '/' }, { name: 'Insurance', to: '/insurance' }]), faqSchema(faqs)]}
       />
       <PageHero

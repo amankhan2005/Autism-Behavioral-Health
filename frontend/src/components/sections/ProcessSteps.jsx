@@ -1,7 +1,7 @@
-import Container from '@/components/ui/Container.jsx';
-import SectionTitle from '@/components/ui/SectionTitle.jsx';
-import Reveal from '@/components/ui/Reveal.jsx';
-import { process } from '@/content/process.js';
+import Container from '../ui/Container.jsx';
+import SectionTitle from '../ui/SectionTitle.jsx';
+import Reveal from '../ui/Reveal.jsx';
+import { process } from '../../content/process.js';
 
 export default function ProcessSteps() {
   return (

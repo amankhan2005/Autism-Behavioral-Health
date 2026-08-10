@@ -8,8 +8,8 @@ import {
   Facebook,
 } from 'lucide-react';
 
-import { site, footerNav, legalNav } from '@/content/site.js';
-import Container from '@/components/ui/Container.jsx';
+import { site, footerNav, legalNav } from '../../content/site.js';
+import Container from '../ui/Container.jsx';
 import Logo from './Logo.jsx';
 
 const socialIcons = {

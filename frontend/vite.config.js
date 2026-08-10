@@ -1,12 +1,15 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'node:path';
 
+// Imports across src/ use relative paths (no "@/" alias), so none is configured.
+//
+// JSX uses the AUTOMATIC runtime, so components never reference the React
+// namespace and don't need `import React`. Pinning it explicitly (plugin +
+// esbuild) guarantees a "React is not defined" error can't arise from a
+// classic-runtime fallback in any environment.
 export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: { '@': path.resolve(process.cwd(), 'src') },
-  },
+  plugins: [react({ jsxRuntime: 'automatic' })],
+  esbuild: { jsx: 'automatic' },
   build: {
     rollupOptions: {
       output: {

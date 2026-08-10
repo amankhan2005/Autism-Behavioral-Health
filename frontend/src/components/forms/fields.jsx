@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { cn } from '@/lib/cn.js';
+import { cn } from '../../lib/cn.js';
 
 const base =
   'w-full rounded-xl border border-line bg-white px-4 py-3 text-[15px] text-ink placeholder:text-muted/70 transition-colors focus:border-brand-400';

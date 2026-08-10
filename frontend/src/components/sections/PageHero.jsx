@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
-import Container from '@/components/ui/Container.jsx';
-import Breadcrumb from '@/components/ui/Breadcrumb.jsx';
+import Container from '../ui/Container.jsx';
+import Breadcrumb from '../ui/Breadcrumb.jsx';
 
 export default function PageHero({
   eyebrow,

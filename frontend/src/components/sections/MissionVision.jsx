@@ -1,6 +1,6 @@
-import Container from '@/components/ui/Container.jsx';
-import Reveal from '@/components/ui/Reveal.jsx';
-import { mission, vision } from '@/content/values.js';
+import Container from '../ui/Container.jsx';
+import Reveal from '../ui/Reveal.jsx';
+import { mission, vision } from '../../content/values.js';
 
 const cards = [
   {

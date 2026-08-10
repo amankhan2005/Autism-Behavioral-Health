@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { MessageCircle, X, Send, Phone, Mail, ExternalLink, ArrowRight } from 'lucide-react';
-import { site } from '@/content/site.js';
-import { answer, greeting, suggestions } from '@/lib/chatbot/knowledge.js';
+import { site } from '../../content/site.js';
+import { answer, greeting, suggestions } from '../../lib/chatbot/knowledge.js';
 
 let msgId = 0;
 const nextId = () => ++msgId;

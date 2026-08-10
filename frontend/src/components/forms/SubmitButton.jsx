@@ -1,6 +1,6 @@
 import { Loader2 } from 'lucide-react';
-import Button from '@/components/ui/Button.jsx';
-import { cn } from '@/lib/cn.js';
+import Button from '../ui/Button.jsx';
+import { cn } from '../../lib/cn.js';
 
 export default function SubmitButton({ submitting, disabled, children, className }) {
   const isDisabled = submitting || disabled;

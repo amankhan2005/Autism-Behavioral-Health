@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { cn } from '@/lib/cn.js';
+import { cn } from '../../lib/cn.js';
 
 const variants = {
   primary: 'bg-brand-600 text-white hover:bg-brand-700 shadow-soft hover:shadow-lift',

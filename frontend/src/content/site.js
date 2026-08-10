@@ -3,6 +3,10 @@ export const site = {
   name: 'Autism & Behavioral Health LLC',
   shortName: 'Autism & Behavioral Health',
   tagline: 'Compassionate, evidence-based ABA therapy for children with autism.',
+  // SEO title suffix + meta description mirror the live site (source of truth).
+  seoTitleBase: 'Behavioral Health & ABA Services in Delaware',
+  description:
+    'Autism & Behavioral Health LLC provides compassionate behavioral health and ABA services in Delaware. Contact us now for tailored support.',
   url: import.meta.env.VITE_SITE_URL || 'https://autismbehavioralhealths.com',
   phone: '302-983-8390',
   phoneHref: 'tel:3029838390',
@@ -64,6 +68,7 @@ export const footerNav = [
   { label: 'Insurance', to: '/insurance' },
   { label: 'Resources', to: '/resources' },
   { label: 'Contact', to: '/contact' },
+  { label: 'Employee Portal', to: '/employee-portal' },
 ];
 
 // Accepted carriers — drive the insurance logo marquee (home + insurance page).

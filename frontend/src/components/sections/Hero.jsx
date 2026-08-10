@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
 import { Phone, ArrowRight } from 'lucide-react';
 
-import Container from '@/components/ui/Container.jsx';
-import Button from '@/components/ui/Button.jsx';
-import Marquee from '@/components/ui/Marquee.jsx';
-import { site, heroMarquee } from '@/content/site.js';
+import Container from '../ui/Container.jsx';
+import Button from '../ui/Button.jsx';
+import Marquee from '../ui/Marquee.jsx';
+import { site, heroMarquee } from '../../content/site.js';
 
 const ease = [0.22, 1, 0.36, 1];
 

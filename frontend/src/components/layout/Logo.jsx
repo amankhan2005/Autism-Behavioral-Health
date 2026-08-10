@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { site } from '@/content/site.js';
+import { site } from '../../content/site.js';
 import logo from '/images/logo.png';
 
 export default function Logo() {

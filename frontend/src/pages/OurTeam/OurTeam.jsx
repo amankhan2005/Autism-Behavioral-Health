@@ -1,11 +1,11 @@
 import { ArrowRight, Sparkles } from 'lucide-react';
-import Seo from '@/components/seo/Seo.jsx';
-import { breadcrumbSchema } from '@/lib/seo.js';
-import Container from '@/components/ui/Container.jsx';
-import Reveal from '@/components/ui/Reveal.jsx';
-import Button from '@/components/ui/Button.jsx';
-import PageHero from '@/components/sections/PageHero.jsx';
-import { team } from '@/content/team.js';
+import Seo from '../../components/seo/Seo.jsx';
+import { breadcrumbSchema } from '../../lib/seo.js';
+import Container from '../../components/ui/Container.jsx';
+import Reveal from '../../components/ui/Reveal.jsx';
+import Button from '../../components/ui/Button.jsx';
+import PageHero from '../../components/sections/PageHero.jsx';
+import { team } from '../../content/team.js';
 
 const accentMap = {
   brand: {
@@ -32,8 +32,8 @@ export default function OurTeam() {
     <>
       <Seo
         title="Our Team"
-        description="Meet the team behind Autism & Behavioral Health LLC — passionate professionals dedicated to compassionate, evidence-based ABA care for children with autism."
         path="/our-team"
+        ogType="article"
         schema={breadcrumbSchema([
           { name: 'Home', to: '/' },
           { name: 'About', to: '/about' },

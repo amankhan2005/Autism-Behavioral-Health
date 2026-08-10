@@ -1,24 +1,24 @@
-import Seo from '@/components/seo/Seo.jsx';
-import { organizationSchema, breadcrumbSchema } from '@/lib/seo.js';
+import Seo from '../../components/seo/Seo.jsx';
+import { organizationSchema, breadcrumbSchema } from '../../lib/seo.js';
 import { ArrowRight } from 'lucide-react';
 
-import Container from '@/components/ui/Container.jsx';
-import Reveal from '@/components/ui/Reveal.jsx';
-import Icon from '@/components/ui/Icon.jsx';
-import Button from '@/components/ui/Button.jsx';
-import PageHero from '@/components/sections/PageHero.jsx';
-import MissionVision from '@/components/sections/MissionVision.jsx';
-import WhyChooseUs from '@/components/sections/WhyChooseUs.jsx';
-import CtaBand from '@/components/sections/CtaBand.jsx';
-import { values } from '@/content/values.js';
+import Container from '../../components/ui/Container.jsx';
+import Reveal from '../../components/ui/Reveal.jsx';
+import Icon from '../../components/ui/Icon.jsx';
+import Button from '../../components/ui/Button.jsx';
+import PageHero from '../../components/sections/PageHero.jsx';
+import MissionVision from '../../components/sections/MissionVision.jsx';
+import WhyChooseUs from '../../components/sections/WhyChooseUs.jsx';
+import CtaBand from '../../components/sections/CtaBand.jsx';
+import { values } from '../../content/values.js';
 
 export default function About() {
   return (
     <>
       <Seo
         title="About Us"
-        description="Learn about Autism & Behavioral Health LLC — our mission, values, and family-centered approach to evidence-based ABA therapy."
         path="/about"
+        ogType="article"
         schema={[
           organizationSchema(),
           breadcrumbSchema([

@@ -1,13 +1,13 @@
 import { ArrowRight, Check } from 'lucide-react';
-import Seo from '@/components/seo/Seo.jsx';
-import { breadcrumbSchema } from '@/lib/seo.js';
-import Container from '@/components/ui/Container.jsx';
-import Reveal from '@/components/ui/Reveal.jsx';
-import Icon from '@/components/ui/Icon.jsx';
-import Button from '@/components/ui/Button.jsx';
-import PageHero from '@/components/sections/PageHero.jsx';
-import CtaBand from '@/components/sections/CtaBand.jsx';
-import { services } from '@/content/services.js';
+import Seo from '../../components/seo/Seo.jsx';
+import { breadcrumbSchema } from '../../lib/seo.js';
+import Container from '../../components/ui/Container.jsx';
+import Reveal from '../../components/ui/Reveal.jsx';
+import Icon from '../../components/ui/Icon.jsx';
+import Button from '../../components/ui/Button.jsx';
+import PageHero from '../../components/sections/PageHero.jsx';
+import CtaBand from '../../components/sections/CtaBand.jsx';
+import { services } from '../../content/services.js';
 
 // Rotating spectrum accents so no two adjacent rows share a color.
 const accents = [
@@ -21,9 +21,9 @@ export default function Services() {
   return (
     <>
       <Seo
-        title="Our Services"
-        description="Explore our ABA services for children with autism — Applied Behavior Analysis, early intervention, assessments, parent training, school consultation, social skills, and more."
+        title="Services"
         path="/services"
+        ogType="article"
         schema={breadcrumbSchema([{ name: 'Home', to: '/' }, { name: 'Services', to: '/services' }])}
       />
       <PageHero

@@ -1,9 +1,9 @@
 // Local, API-free knowledge layer for the site chatbot.
 // SOURCE OF TRUTH: everything below is derived from the existing content files
 // (site.js, services.js, faqs.js) — no company information is invented here.
-import { site } from '@/content/site.js';
-import { services } from '@/content/services.js';
-import { homeFaqs } from '@/content/faqs.js';
+import { site } from '../../content/site.js';
+import { services } from '../../content/services.js';
+import { homeFaqs } from '../../content/faqs.js';
 
 const fullAddress = `${site.address.line1}, ${site.address.city}, ${site.address.state} ${site.address.zip}`;
 const hoursText = site.hours.map((h) => `${h.day}: ${h.time}`).join('\n');

@@ -1,5 +1,5 @@
-import Marquee from '@/components/ui/Marquee.jsx';
-import { insurers } from '@/content/site.js';
+import Marquee from '../ui/Marquee.jsx';
+import { insurers } from '../../content/site.js';
 
 export default function InsuranceMarquee({ duration = 40 }) {
   return (

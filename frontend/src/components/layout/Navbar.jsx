@@ -3,10 +3,11 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X, ChevronDown, Phone } from 'lucide-react';
 
-import { nav, aboutMenu, site } from '@/content/site.js';
-import { services } from '@/content/services.js';
-import Container from '@/components/ui/Container.jsx';
-import Button from '@/components/ui/Button.jsx';
+import { nav, aboutMenu, site } from '../../content/site.js';
+import { services } from '../../content/services.js';
+import Container from '../ui/Container.jsx';
+import Button from '../ui/Button.jsx';
+import GoogleTranslate from './GoogleTranslate.jsx';
 
 import logoDefault from '/images/logo.png';
 import logoScroll from '/images/logo-dark.png';
@@ -201,6 +202,8 @@ export default function Navbar() {
           />
         </Link>
 
+        {/* RIGHT SIDE: nav + call button + language selector + mobile toggle */}
+        <div className="flex items-center gap-2 lg:gap-3">
         {/* DESKTOP NAV */}
         <nav
           className="hidden items-center gap-1 lg:flex"
@@ -229,19 +232,6 @@ export default function Navbar() {
             )
           )}
 
-          <NavLink
-            to="/employee-portal"
-            className={({ isActive }) =>
-              `${link} ${
-                isActive
-                  ? 'text-white'
-                  : 'text-white/70 hover:text-white'
-              }`
-            }
-          >
-            Employee Portal
-          </NavLink>
-
           {/* CALL BUTTON */}
           <Button
             href={site.phoneHref}
@@ -255,6 +245,9 @@ export default function Navbar() {
             Call Us Now · {site.phone}
           </Button>
         </nav>
+
+        {/* LANGUAGE SELECTOR — far right, immediately after Call Us Now (all breakpoints) */}
+        <GoogleTranslate />
 
         {/* MOBILE MENU BUTTON */}
         <button
@@ -270,6 +263,7 @@ export default function Navbar() {
             <Menu className="h-5 w-5" />
           )}
         </button>
+        </div>
       </Container>
 
       {/* MOBILE NAVIGATION */}
@@ -389,13 +383,6 @@ export default function Navbar() {
                   </NavLink>
                 )
               )}
-
-              <NavLink
-                to="/employee-portal"
-                className="rounded-xl px-4 py-3 text-sm font-medium text-white/60 transition-colors hover:bg-white/10 hover:text-white"
-              >
-                Employee Portal
-              </NavLink>
 
               {/* MOBILE CALL BUTTON */}
               <Button

@@ -1,7 +1,7 @@
-import Container from '@/components/ui/Container.jsx';
-import SectionTitle from '@/components/ui/SectionTitle.jsx';
-import Reveal from '@/components/ui/Reveal.jsx';
-import { whyChooseUs } from '@/content/values.js';
+import Container from '../ui/Container.jsx';
+import SectionTitle from '../ui/SectionTitle.jsx';
+import Reveal from '../ui/Reveal.jsx';
+import { whyChooseUs } from '../../content/values.js';
 
 export default function WhyChooseUs() {
   return (

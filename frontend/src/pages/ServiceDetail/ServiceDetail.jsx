@@ -1,14 +1,14 @@
 import { useParams, Navigate } from 'react-router-dom';
 import { CheckCircle2 } from 'lucide-react';
-import Seo from '@/components/seo/Seo.jsx';
-import { serviceSchema, faqSchema, breadcrumbSchema } from '@/lib/seo.js';
-import Container from '@/components/ui/Container.jsx';
-import Reveal from '@/components/ui/Reveal.jsx';
-import Breadcrumb from '@/components/ui/Breadcrumb.jsx';
-import Button from '@/components/ui/Button.jsx';
-import Accordion from '@/components/ui/Accordion.jsx';
-import { process } from '@/content/process.js';
-import { getService } from '@/content/services.js';
+import Seo from '../../components/seo/Seo.jsx';
+import { serviceSchema, faqSchema, breadcrumbSchema } from '../../lib/seo.js';
+import Container from '../../components/ui/Container.jsx';
+import Reveal from '../../components/ui/Reveal.jsx';
+import Breadcrumb from '../../components/ui/Breadcrumb.jsx';
+import Button from '../../components/ui/Button.jsx';
+import Accordion from '../../components/ui/Accordion.jsx';
+import { process } from '../../content/process.js';
+import { getService } from '../../content/services.js';
 
 export default function ServiceDetail() {
   const { slug } = useParams();

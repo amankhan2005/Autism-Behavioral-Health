@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { api } from '@/lib/api.js';
-import { useToast } from '@/components/ui/toast.jsx';
+import { api } from '../lib/api.js';
+import { useToast } from '../components/ui/toast.jsx';
 
 // Posts form data to `endpoint`, surfaces success/error toasts, resets on success.
 export function useSubmitForm(endpoint, { reset } = {}) {

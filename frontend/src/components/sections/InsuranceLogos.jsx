@@ -1,4 +1,4 @@
-import { insurers } from '@/content/site.js';
+import { insurers } from '../../content/site.js';
 
 // Static, evenly-spaced logo row. Single row on desktop (8 columns),
 // wrapping to 4 (tablet) then 2 (mobile) only when space requires it.

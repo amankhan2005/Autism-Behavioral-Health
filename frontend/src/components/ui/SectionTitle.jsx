@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { cn } from '@/lib/cn.js';
+import { cn } from '../../lib/cn.js';
 
 export function Eyebrow({ children, className }) {
   return <span className={cn('eyebrow', className)}>{children}</span>;

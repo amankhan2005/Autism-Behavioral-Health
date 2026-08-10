@@ -1,8 +1,8 @@
 import { ArrowRight } from 'lucide-react';
-import Container from '@/components/ui/Container.jsx';
-import Reveal from '@/components/ui/Reveal.jsx';
-import { Eyebrow } from '@/components/ui/SectionTitle.jsx';
-import Button from '@/components/ui/Button.jsx';
+import Container from '../ui/Container.jsx';
+import Reveal from '../ui/Reveal.jsx';
+import { Eyebrow } from '../ui/SectionTitle.jsx';
+import Button from '../ui/Button.jsx';
 
 import aboutImage from '/images/about.jpg';
 
