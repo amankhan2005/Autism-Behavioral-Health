@@ -3,7 +3,7 @@
 export const team = [
   {
     name: 'Rose Ngatia',
-    credentials: 'MSN, RN',
+    credentials: 'MSN, PMHNP',
     role: 'Behavioral Health',
     photo: null,
     initials: 'RN',
