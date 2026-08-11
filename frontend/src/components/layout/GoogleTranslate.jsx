@@ -4,16 +4,19 @@ import { ChevronDown, Check } from 'lucide-react';
 import { cn } from '../../lib/cn.js';
 
 /**
- * Custom, premium language selector that drives the real Google Translate
- * widget underneath. The native Google combo (.goog-te-combo) is kept in the
- * DOM but visually hidden; selecting a language here sets that combo's value
- * and fires its change event, so actual translation is performed by Google.
+ * Custom, premium language selector.
  *
- * Google Translate is still initialized exactly once (single script + guards).
+ * It does NOT set up, load, or initialize Google Translate. The real Google
+ * Translate widget is created statically in index.html (outside the React
+ * root), exactly like the default widget — so Google owns that DOM and there is
+ * a single, stable `.goog-te-combo`. This component's ONLY job is to find that
+ * real combo and drive it: set the option value + dispatch a native `change`,
+ * which makes Google translate the page. No fake translation, no manual text
+ * swapping, no DOM monkey-patching, no re-initialization.
  */
 
-// The only 10 languages we expose. `code` is the Google Translate language
-// code used on the hidden combo; `cc` is the flag country code (flagcdn).
+// The 10 languages exposed in the custom dropdown. `code` must equal the real
+// Google Translate `<option>` value on `.goog-te-combo`. `cc` is the flag code.
 const LANGUAGES = [
   { code: 'en', label: 'English', abbr: 'EN', cc: 'us' },
   { code: 'ar', label: 'Arabic', abbr: 'AR', cc: 'sa' },
@@ -27,53 +30,6 @@ const LANGUAGES = [
   { code: 'es', label: 'Spanish', abbr: 'ES', cc: 'es' },
 ];
 
-const INCLUDED = LANGUAGES.map((l) => l.code).join(',');
-const SCRIPT_ID = 'google-translate-script';
-
-/*
- * React ↔ Google Translate DOM safeguard.
- *
- * The custom selector below is fully React-controlled and marked `notranslate`,
- * so Google never touches it and its state (flag / code / checkmark) always
- * updates correctly on its own. This guard only concerns the rest of the page:
- * Google translates by re-parenting text nodes into <font> wrappers, and when
- * React later removes/moves a node whose parent Google changed (e.g. on route
- * change), the native call throws NotFoundError and white-screens the app.
- *
- * There is no fully reliable way to avoid this for a page that is entirely
- * React-rendered AND translated by Google, so we install the minimal, safe
- * mitigation: call the NATIVE method first and only fall back when it would
- * otherwise throw. Normal DOM operations are never altered — the wrappers only
- * act on the specific error path. Installed once, in the browser only.
- */
-if (typeof window !== 'undefined' && !window.__gtDomGuard) {
-  window.__gtDomGuard = true;
-  const originalRemoveChild = Node.prototype.removeChild;
-  Node.prototype.removeChild = function safeRemoveChild(child) {
-    try {
-      return originalRemoveChild.call(this, child);
-    } catch {
-      // Node was re-parented by Google Translate — remove from its real parent.
-      if (child && child.parentNode && child.parentNode !== this) {
-        try { return child.parentNode.removeChild(child); } catch { /* ignore */ }
-      }
-      return child;
-    }
-  };
-  const originalInsertBefore = Node.prototype.insertBefore;
-  Node.prototype.insertBefore = function safeInsertBefore(newNode, referenceNode) {
-    try {
-      return originalInsertBefore.call(this, newNode, referenceNode);
-    } catch {
-      if (referenceNode && referenceNode.parentNode && referenceNode.parentNode !== this) {
-        try { return referenceNode.parentNode.insertBefore(newNode, referenceNode); } catch { /* ignore */ }
-      }
-      try { return this.appendChild(newNode); } catch { /* ignore */ }
-      return newNode;
-    }
-  };
-}
-
 // Rectangular flag image (consistent size, subtle border).
 function Flag({ cc, label, className }) {
   return (
@@ -86,33 +42,59 @@ function Flag({ cc, label, className }) {
   );
 }
 
-// Read the language Google is ACTUALLY showing, from its cookie (e.g. /en/fr).
-// This is the source of truth we sync the UI against.
+// The language Google is ACTUALLY showing, read from its cookie (e.g. /en/fr).
 function readGoogleCode() {
   if (typeof document === 'undefined') return 'en';
-  const match = document.cookie.match(/(?:^|;\s*)googtrans=([^;]+)/);
-  if (!match) return 'en';
-  const parts = decodeURIComponent(match[1]).split('/').filter(Boolean);
+  const m = document.cookie.match(/(?:^|;\s*)googtrans=([^;]+)/);
+  if (!m) return 'en';
+  const parts = decodeURIComponent(m[1]).split('/').filter(Boolean);
   const target = parts[parts.length - 1];
   return LANGUAGES.some((l) => l.code === target) ? target : 'en';
 }
 
-// Drive the hidden Google combo: wait until it exists AND has the target
-// option, then set the value and fire a real change event so Google
-// translates. `onFired` runs once the change has been dispatched.
+// Resolve the REAL option value on the combo for a desired code. We never
+// assume the value — we match against the combo's actual <option> values
+// (exact, then case-insensitive, then language-prefix, e.g. zh -> zh-CN).
+function resolveOptionValue(combo, code) {
+  const values = Array.from(combo.options).map((o) => o.value).filter(Boolean);
+  if (values.includes(code)) return code;
+  const lower = code.toLowerCase();
+  const ci = values.find((v) => v.toLowerCase() === lower);
+  if (ci) return ci;
+  const base = lower.split('-')[0];
+  const pref = values.find((v) => v.toLowerCase().split('-')[0] === base);
+  return pref || null;
+}
+
+// Drive the real hidden Google combo. Waits (polls) until the combo exists and
+// the target option is available, then sets the value and fires a native change
+// event so Google performs the translation. `onFired(value)` runs after.
 function applyLanguage(code, onFired) {
   let tries = 0;
   const tick = () => {
     const combo = document.querySelector('.goog-te-combo');
-    const ready = combo && Array.from(combo.options).some((o) => o.value === code);
-    // 'en' restores the original; its option may lag, so don't block on it.
-    if (combo && (ready || code === 'en')) {
-      combo.value = code;
-      combo.dispatchEvent(new Event('change', { bubbles: true }));
-      onFired?.();
-      return;
+    if (combo) {
+      const value = code === 'en' ? 'en' : resolveOptionValue(combo, code);
+      if (value || code === 'en') {
+        combo.value = value || 'en';
+        // Native change on the real select — this is what Google listens for.
+        combo.dispatchEvent(new Event('change', { bubbles: true }));
+        onFired?.(combo.value);
+        return;
+      }
     }
-    if (tries++ < 40) setTimeout(tick, 75);
+    if (tries++ < 60) {
+      setTimeout(tick, 100);
+    } else if (typeof console !== 'undefined') {
+      // Surfaces the exact failure instead of failing silently.
+      // eslint-disable-next-line no-console
+      console.warn(
+        '[GoogleTranslate] .goog-te-combo not ready or missing option for',
+        code,
+        '- is the Google widget script in index.html loading? combo:',
+        document.querySelector('.goog-te-combo'),
+      );
+    }
   };
   tick();
 }
@@ -127,36 +109,9 @@ export default function GoogleTranslate() {
   const optionRefs = useRef([]);
   const syncTimer = useRef(null);
 
-  // Initialize Google Translate once, restricted to our 10 languages.
+  // Reflect any already-active translation (persisted by Google via cookie).
   useEffect(() => {
-    window.googleTranslateElementInit = () => {
-      const el = document.getElementById('google_translate_element');
-      if (!el || el.childElementCount > 0) return; // already populated
-      if (!window.google?.translate?.TranslateElement) return;
-      new window.google.translate.TranslateElement(
-        {
-          pageLanguage: 'en',
-          includedLanguages: INCLUDED,
-          layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
-          autoDisplay: false,
-        },
-        'google_translate_element',
-      );
-    };
-
-    if (document.getElementById(SCRIPT_ID)) {
-      window.googleTranslateElementInit();
-    } else {
-      const script = document.createElement('script');
-      script.id = SCRIPT_ID;
-      script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-      script.async = true;
-      document.body.appendChild(script);
-    }
-
-    // Reflect any already-active translation (persisted via cookie).
     setCurrent(readGoogleCode());
-
     return () => clearInterval(syncTimer.current);
   }, []);
 
@@ -180,17 +135,13 @@ export default function GoogleTranslate() {
   }, [open, current]);
 
   const select = (code) => {
-    // 1) Optimistic UI update (flag, 2-letter code, checkmark) — immediate.
-    setCurrent(code);
-    // 6) Close the dropdown and return focus to the button.
-    setOpen(false);
+    setCurrent(code);           // optimistic UI (flag, 2-letter code, checkmark)
+    setOpen(false);             // close dropdown
     buttonRef.current?.focus();
 
-    // 1 & 7) Trigger the REAL Google translation via the hidden combo.
+    // Drive the REAL Google combo -> Google translates the page.
     applyLanguage(code, () => {
-      // 2-5) Keep the UI synced with Google's ACTUAL state (the cookie),
-      // covering the case where translation succeeds asynchronously or the
-      // optimistic value and Google's result ever diverge.
+      // Sync UI to Google's ACTUAL state (cookie) once it settles.
       clearInterval(syncTimer.current);
       let ticks = 0;
       syncTimer.current = setInterval(() => {
@@ -198,8 +149,8 @@ export default function GoogleTranslate() {
         if (real === code) {
           setCurrent(code);
           clearInterval(syncTimer.current);
-        } else if (++ticks >= 12) {
-          setCurrent(real); // reflect whatever Google ended up on
+        } else if (++ticks >= 16) {
+          setCurrent(real);
           clearInterval(syncTimer.current);
         }
       }, 250);
@@ -238,9 +189,6 @@ export default function GoogleTranslate() {
   return (
     // notranslate keeps Google from translating our own selector labels.
     <div ref={rootRef} className="notranslate relative" translate="no">
-      {/* Hidden native Google widget — kept functional, visually removed. */}
-      <div id="google_translate_element" aria-hidden="true" />
-
       {/* Compact navbar button: flag + 2-letter code + chevron. */}
       <button
         ref={buttonRef}

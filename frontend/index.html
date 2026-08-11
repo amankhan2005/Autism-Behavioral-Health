@@ -21,7 +21,29 @@
     />
   </head>
   <body>
+    <!--
+      Real Google Translate widget — set up exactly like the standard/default
+      widget (static markup, outside the React root), so Google owns this DOM
+      entirely and initializes once. It is visually hidden via CSS but stays
+      fully functional; the custom React selector (GoogleTranslate.jsx) only
+      finds the resulting .goog-te-combo and drives it. Keeping this out of
+      React guarantees the combo the selector drives is the same one Google
+      translates with.
+    -->
+    <div id="google_translate_element" class="notranslate" translate="no" aria-hidden="true"></div>
+
     <div id="root"></div>
+
     <script type="module" src="/src/main.jsx"></script>
+
+    <script>
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          { pageLanguage: 'en', autoDisplay: false },
+          'google_translate_element'
+        );
+      }
+    </script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   </body>
 </html>

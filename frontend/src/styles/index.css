@@ -44,20 +44,72 @@
   }
 }
 
-/* Google Translate — the native widget is hidden; a custom selector
-   (GoogleTranslate.jsx) drives it. Keep it in the DOM and functional, but
-   removed from view, and stop Google's banner from shifting the header. */
-.goog-te-banner-frame.skiptranslate,
-.goog-te-gadget-icon { display: none !important; }
-body { top: 0 !important; }
+/* ==========================================================================
+   Google Translate — engine runs invisibly in the background.
+   The ONLY visible language control is our custom selector (GoogleTranslate.jsx),
+   which drives the real .goog-te-combo programmatically. Everything below hides
+   ALL of Google's own visible UI while keeping the combo fully FUNCTIONAL.
+   Nothing here uses display:none on the combo/container itself, so Google still
+   initializes and translates.
+   ========================================================================== */
+
+/* 1) Widget container: keep in the DOM and operational, but push it fully
+      off-screen and make it non-interactive so it can never be seen or clicked. */
 #google_translate_element {
   position: absolute !important;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  white-space: nowrap;
+  left: -9999px !important;
+  top: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
 }
-/* Google can add inline highlight styles to translated text; keep backgrounds clean. */
-font.goog-text-highlight { background: none !important; box-shadow: none !important; }
+/* The combo must stay in the DOM/functional — never display:none it. Just make
+   it invisible and click-proof (we set its value + dispatch change in JS). */
+.goog-te-combo {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* 2) The top toolbar/banner iframe Google injects after a translation. */
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+iframe.goog-te-banner-frame,
+.goog-te-ftab,
+.goog-te-ftab-float { display: none !important; visibility: hidden !important; }
+
+/* 3) The Google language MENU popup iframe (the dropdown/modal). */
+.goog-te-menu-frame,
+iframe.goog-te-menu-frame,
+.goog-te-menu-value,
+.goog-te-menu2 { display: none !important; visibility: hidden !important; }
+
+/* 4) Gadget chrome, branding, icon, "Powered by Google" link. */
+.goog-te-gadget,
+.goog-te-gadget-simple,
+.goog-te-gadget-icon,
+.goog-logo-link,
+.goog-te-gadget > span,
+#goog-gt-tt + div { font-size: 0 !important; }
+.goog-te-gadget-icon,
+.goog-logo-link { display: none !important; }
+
+/* 5) Hover tooltip + text highlight on translated words (the little popup that
+      shows the original text). */
+#goog-gt-tt,
+.goog-tooltip,
+.goog-tooltip:hover,
+.goog-te-balloon-frame { display: none !important; }
+.goog-text-highlight,
+font.goog-text-highlight {
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* 6) Google shifts <body> down (top: 40px) to make room for its banner — undo it
+      so our fixed navbar and layout never move. */
+body { top: 0 !important; position: static !important; }
+.skiptranslate > iframe { display: none !important; visibility: hidden !important; height: 0 !important; }
