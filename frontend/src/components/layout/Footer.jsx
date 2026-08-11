@@ -144,6 +144,24 @@ export default function Footer() {
               />
               Fax: {site.fax}
             </li>
+
+            {/* Office Hours */}
+            <li className="flex items-start gap-2.5">
+              <span
+                className="h-4 w-4 shrink-0"
+                aria-hidden="true"
+              />
+
+              <span>
+                <span className="font-medium text-ink">Office Hours:</span>
+                <br />
+                Monday – Friday: 9:00 AM – 6:00 PM
+                <br />
+                Saturday: 9:00 AM – 1:00 PM
+                <br />
+                Sunday: Closed
+              </span>
+            </li>
           </ul>
         </div>
       </Container>

@@ -33,7 +33,7 @@ export const site = {
     href: 'https://www.facebook.com/profile.php?id=61580368117716',
   },
 ],
-  employeeFormsUrl: 'https://pdf.ac/ti08-ufZw',
+  employeeFormsUrl: 'https://pdf.ac/Xc2czFJ1IR',
   developer: { name: 'WebieApp Solutions LLC', url: 'https://www.webieapp.com/' },
 };
 
@@ -98,13 +98,15 @@ export const insurers = [
     logo: '/insurance/medicaid.png',
   },
   {
-    name: 'Kaiser',
-    logo: '/insurance/kaiser.png',
+    name: 'Delaware first health ',
+    logo: '/insurance/delaware-first.jpg',
   },
   {
-    name: 'Tricare',
-    logo: '/insurance/tricare.png',
-  },
+    name:'AmeriHealth Caritas',
+    logo:'/insurance/AmeriHealth-Caritas.png',
+  }
+   
+  
 ];
 // Right-to-left hero marquee phrases (ABA/autism scope only).
 export const heroMarquee = [
