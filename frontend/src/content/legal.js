@@ -52,7 +52,7 @@ export const legalPages = {
     updated,
     intro: 'We respect your privacy rights. This page explains your choices regarding the sale or sharing of personal information.',
     sections: [
-      { heading: 'We do not sell your information', body: 'Autism & Behavioral Health LLC does not sell your personal information, and we do not share it for cross-context behavioral advertising.' },
+      { heading: 'We do not sell your information', body: 'Autism & Behavioral Health does not sell your personal information, and we do not share it for cross-context behavioral advertising.' },
       { heading: 'Your rights', body: 'Depending on where you live, you may have the right to opt out of the sale or sharing of personal information, and to request access or deletion.' },
       { heading: 'How to make a request', body: 'To exercise your rights, contact us using the details below. We will respond consistent with applicable law.' },
     ],

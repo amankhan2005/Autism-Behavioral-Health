@@ -17,7 +17,7 @@ export default function EmployeePortal() {
     <>
       <Seo
         title="Employee Portal"
-        description="Secure access to employee forms for the Autism & Behavioral Health LLC team."
+        description="Secure access to employee forms for the Autism & Behavioral Health team."
         path="/employee-portal"
         schema={breadcrumbSchema([{ name: 'Home', to: '/' }, { name: 'Employee Portal', to: '/employee-portal' }])}
       />

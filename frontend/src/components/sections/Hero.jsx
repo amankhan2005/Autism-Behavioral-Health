@@ -56,7 +56,7 @@ export default function Hero() {
                 aria-hidden="true"
               />
 
-              Autism & Behavioral Health LLC
+              Autism & Behavioral Health
             </motion.span>
 
             {/* Main Heading */}

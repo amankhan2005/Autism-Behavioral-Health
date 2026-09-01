@@ -61,7 +61,7 @@ export default function About() {
 
             <div className="mt-5 space-y-4 text-lg leading-relaxed text-muted">
               <p>
-                Autism &amp; Behavioral Health LLC was founded on a simple
+                Autism &amp; Behavioral Health was founded on a simple
                 belief: every child deserves individualized support in a
                 nurturing environment that encourages learning, independence,
                 and confidence.

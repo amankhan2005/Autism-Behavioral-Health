@@ -1,12 +1,12 @@
 // Business info — SINGLE SOURCE OF TRUTH.
 export const site = {
-  name: 'Autism & Behavioral Health LLC',
+  name: 'Autism & Behavioral Health',
   shortName: 'Autism & Behavioral Health',
   tagline: 'Compassionate, evidence-based ABA therapy for children with autism.',
   // SEO title suffix + meta description mirror the live site (source of truth).
   seoTitleBase: 'Behavioral Health & ABA Services in Delaware',
   description:
-    'Autism & Behavioral Health LLC provides compassionate behavioral health and ABA services in Delaware. Contact us now for tailored support.',
+    'Autism & Behavioral Health provides compassionate behavioral health and ABA services in Delaware. Contact us now for tailored support.',
   url: import.meta.env.VITE_SITE_URL || 'https://autismbehavioralhealths.com',
   phone: '302-983-8390',
   phoneHref: 'tel:3029838390',
@@ -104,9 +104,11 @@ export const insurers = [
   {
     name:'AmeriHealth Caritas',
     logo:'/insurance/AmeriHealth-Caritas.png',
-  }
-   
-  
+  },
+  {
+    name: 'Highmark Health Options – Delaware',
+    logo: '/insurance/highmark-health-options.svg',
+  },
 ];
 // Right-to-left hero marquee phrases (ABA/autism scope only).
 export const heroMarquee = [

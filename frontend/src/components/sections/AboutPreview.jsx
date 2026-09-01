@@ -33,7 +33,7 @@ export default function AboutPreview() {
           </h2>
 
           <p className="mt-5 text-lg leading-relaxed text-muted">
-            Autism &amp; Behavioral Health LLC provides high-quality ABA
+            Autism &amp; Behavioral Health provides high-quality ABA
             services for children with autism and developmental needs. We
             partner closely with families to create personalized plans that
             produce real, measurable progress in a warm, nurturing environment.
