@@ -16,7 +16,7 @@ export const site = {
     line1: '750 Barksdale Rd',
     city: 'Newark',
     state: 'DE',
-    zip: '19709',
+    zip: '19711',
   },
   hours: [
     { day: 'Monday – Friday', time: '8:00 AM – 6:00 PM' },
