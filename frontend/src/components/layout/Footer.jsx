@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom';
 import {
   Phone,
@@ -90,6 +91,15 @@ export default function Footer() {
                 </Link>
               </li>
             ))}
+
+            <li>
+              <Link
+                to="/intake-forms"
+                className="transition-colors hover:text-brand-700"
+              >
+                Intake Forms
+              </Link>
+            </li>
           </ul>
         </nav>
 
@@ -153,7 +163,9 @@ export default function Footer() {
               />
 
               <span>
-                <span className="font-medium text-ink">Office Hours:</span>
+                <span className="font-medium text-ink">
+                  Office Hours:
+                </span>
                 <br />
                 Monday – Friday: 9:00 AM – 6:00 PM
                 <br />

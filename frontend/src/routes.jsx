@@ -11,6 +11,7 @@ const ServiceDetail = lazy(() => import('./pages/ServiceDetail/ServiceDetail.jsx
 const Resources = lazy(() => import('./pages/Resources/Resources.jsx'));
 const Insurance = lazy(() => import('./pages/Insurance/Insurance.jsx'));
 const EmployeePortal = lazy(() => import('./pages/EmployeePortal/EmployeePortal.jsx'));
+const IntakeForms = lazy(() => import('./pages/IntakeForms/IntakeForms.jsx'));
 const Contact = lazy(() => import('./pages/Contact/Contact.jsx'));
 const Privacy = lazy(() => import('./pages/legal/Privacy.jsx'));
 const Terms = lazy(() => import('./pages/legal/Terms.jsx'));
@@ -32,6 +33,7 @@ export const router = createBrowserRouter([
       { path: 'resources', element: s(<Resources />) },
       { path: 'insurance', element: s(<Insurance />) },
       { path: 'employee-portal', element: s(<EmployeePortal />) },
+      { path: 'intake-forms', element: s(<IntakeForms />) },
       { path: 'contact', element: s(<Contact />) },
       { path: 'privacy-policy', element: s(<Privacy />) },
       { path: 'terms', element: s(<Terms />) },
