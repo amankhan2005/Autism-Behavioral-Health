@@ -7,21 +7,12 @@ import Reveal from '../../components/ui/Reveal.jsx';
 import Button from '../../components/ui/Button.jsx';
 import PageHero from '../../components/sections/PageHero.jsx';
 
-// TODO(client): Add more intake forms here as they become available.
 const forms = [
   {
     title: 'ABA Intake Form',
     description:
       'For families interested in ABA therapy services. Complete this form to help our team understand your child’s needs and begin the intake process.',
     url: 'https://pdf.ac/Xc2czFJ1IR',
-    buttonLabel: 'Open ABA Intake Form',
-  },
-  {
-    title: 'Employment Form',
-    description:
-      'Interested in joining our team? Complete the employment form to share your information and apply for opportunities with Autism & Behavioral Health.',
-    url: 'https://pdf.ac/ti08-ufZw',
-    buttonLabel: 'Open Employment Form',
   },
 ];
 
@@ -35,15 +26,15 @@ export default function IntakeForms() {
     <>
       <Seo
         title="Intake Forms"
-        description="Access ABA therapy intake forms for families and employment forms for applicants at Autism & Behavioral Health."
+        description="Complete the ABA intake form for families interested in ABA therapy services at Autism & Behavioral Health."
         path="/intake-forms"
         schema={breadcrumbSchema(breadcrumb)}
       />
 
       <PageHero
         eyebrow="Intake Forms"
-        title="Forms to get started"
-        subtitle="Whether you're seeking ABA therapy services for your child or interested in joining our team, choose the form that best fits your needs."
+        title="ABA Therapy Intake Form"
+        subtitle="For families interested in ABA therapy services. Take the first step toward personalized support for your child."
         breadcrumb={breadcrumb}
       />
 
@@ -74,7 +65,7 @@ export default function IntakeForms() {
                     rel="noopener noreferrer"
                     className="mt-6 self-start"
                   >
-                    {form.buttonLabel}
+                    Open ABA Intake Form
                     <ExternalLink
                       className="h-4 w-4"
                       aria-hidden="true"
@@ -87,7 +78,7 @@ export default function IntakeForms() {
 
           <p className="mt-8 flex items-center justify-center gap-2 text-sm text-muted">
             <Lock className="h-4 w-4" aria-hidden="true" />
-            Forms open securely in a new tab.
+            The intake form opens in a new tab.
           </p>
         </Container>
       </section>
